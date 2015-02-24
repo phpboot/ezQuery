@@ -5,12 +5,11 @@ require_once('connector/classes/Connection.php');
 $conn = new \connector\classes\Connection();
 
 
-//Get Database results as an object
-// $conn->select('orders')->getDatabaseObject();
+//Get Database Results as object
+$conn->select('orders')
+    ->where('name','=','Orlando')
+    ->getObject();
 
-//Get Database Results as Json
-$conn->select('orders',['id','name','order'])
-    ->where('name','=','Javier')
-    ->orWhere('name','=','orlando')
-    ->getPreparedArray();
+echo $conn->getCount();
+
 ?>

@@ -18,6 +18,8 @@ class Connection extends Query {
     protected $conn = ''; // connection object
     protected $tables = ''; //database tables
 
+    protected $_num_rows = ''; //number of rows a query retrieved
+
     /*
      * Constructor connects to the database
      */
@@ -73,96 +75,6 @@ class Connection extends Query {
 
 
     /*
-     * Accepts  the query and also the connection object
-     *
-     * OK
-     */
-
-    public function getObject()
-    {
-        $conn = $this->conn;// connection object
-        $sql = $this->_query;// query
-
-
-        $results = ''; // initialize result
-        //mysql query
-
-        if ($result = $conn->query($sql))
-        {
-            while ($obj = $result->fetch_object())
-            {
-                // new object array
-                $results[] = $obj;
-            }
-
-
-            /* free result set */
-
-            $result->close();
-        }
-
-        var_dump($results);
-
-    } // end of function
-
-
-    /*
-     * get database query results as an array
-     *
-     *  ** Needs to get the table where the results are coming from
-     */
-    public function getArray()
-    {
-        $sql = $this->_query;// query
-        $conn = $this->conn;
-        $results = '';// initialize results
-
-        //mysql query
-        if ($result = $conn->query($sql))
-        {
-            while ($obj = $result->fetch_assoc())
-            {
-                // new object array
-                $results[] = $obj;
-            }
-
-            /* free result set */
-            $result->close();
-        }
-
-        var_dump($results);
-
-    }
-
-    /*
- * Gets executes the query and gets the results as Json
- */
-    public function getJson()
-    {
-        $sql = $this->_query;// query
-
-        $conn = $this->conn;
-
-        $results = ''; // initialize result
-        //mysql query
-        if ($result = $conn->query($sql))
-        {
-            while ($obj = $result->fetch_object())
-            {
-                // new object array
-                $results[] = $obj;
-            }
-
-            /* free result set */
-            $result->close();
-        }
-
-        //convert to json
-        var_dump(json_encode($results));
-    }
-
-
-    /*
      * Gets all the database tables
      * @param($conn) = mysqli database connection
      *
@@ -186,11 +98,6 @@ class Connection extends Query {
 
     }
 
-    public function getDatabaseColumns()
-    {
-        $conn = $this->conn;
-
-    }
 
     /* ------------------------------------------
      *
@@ -215,7 +122,7 @@ class Connection extends Query {
     /*
      * Makes a query and retrieves information from the database as JSON
      */
-    public function getPreparedJson()
+    public function getJson()
     {
         $conn = $this->conn;
         $sql = $this->_query;// query
@@ -228,15 +135,39 @@ class Connection extends Query {
     } // end of function
 
     /*
-     * Makes a query and retrieves information from the database as JSON
+     * Makes a query and retrieves information from the database as an Array
      */
-    public function getPreparedArray()
+    public function getArray()
     {
         $conn = $this->conn;
         $sql = $this->_query;// query
         $results = $this->makeQuery($sql, $conn);
 
         var_dump($results);
+
+    } // end of function
+
+    /*
+     * Makes a query and retrieves information from the database as Object
+     */
+    public function getObject()
+    {
+        $conn = $this->conn;
+        $sql = $this->_query;// query
+        $results = $this->makeQuery($sql, $conn);
+
+        //initialize object
+        $obj = new \stdClass();
+
+        if (is_array($results) && !empty($results))
+        {
+            //create an object
+            $obj = json_decode(json_encode($results));
+        }
+
+        var_dump($obj);
+
+        return $obj;
 
     } // end of function
 
@@ -266,6 +197,13 @@ class Connection extends Query {
             //bind Results
             $stmt->execute();
 
+            //store the results
+            $stmt->store_result();
+
+            //store the num_rows in protected variable _num_rows
+            $this->_num_rows = $stmt->num_rows;
+
+
             //get the meta and the column names from the database
             $meta = $stmt->result_metadata();
 
@@ -292,6 +230,11 @@ class Connection extends Query {
                 }
                 $i ++;
             }
+
+
+            // close statement
+            $stmt->close();
+
             return $results;
         }
     }
@@ -353,6 +296,19 @@ class Connection extends Query {
             return false; // returns nothing
         }
 
+    }// end of function
+
+
+    /*
+     * Gets the number of rows retrieved from the database
+     *
+     * @return int
+     */
+    public function getCount()
+    {
+        $count = $this->_num_rows;
+
+        return $count;
     }
 
 

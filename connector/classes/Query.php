@@ -81,6 +81,9 @@ class Query {
 
     public function select($table, $columns = array())
     {
+        // Cleans the sql so that you can keep querying the database
+        $this->cleanUp();
+
         if (!empty($columns))
         {
 
@@ -249,6 +252,16 @@ class Query {
         var_dump($this->_query);
 
         return $this;
+    }
+
+    /*
+     * Cleans all the variables so that you can keep querying the database
+     */
+    protected function cleanUp(){
+        $this->_columns = array();
+        $this->_parameters = array();
+        $this->table = null;
+        $this->query = null;
     }
 
 }
