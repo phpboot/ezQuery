@@ -73,30 +73,6 @@ class Connection extends Query {
     } // end of function
 
 
-    /*
-     * Gets all the database tables
-     * @param($conn) = mysqli database connection
-     *
-     */
-
-    protected function getDatabaseTables()
-    {
-        $conn = $this->conn;
-
-// query to show all the tables
-        $tables = 'SHOW TABLES';
-        $results = $conn->query($tables);
-
-        while ($row = $results->fetch_object())
-        {
-            $dbTables[] = current($row);
-
-        }
-
-        return $dbTables;
-
-    }
-
 
     /* ------------------------------------------
      *
@@ -115,6 +91,35 @@ class Connection extends Query {
      */
     public function save()
     {
+        $sql = $this->_query;
+        $conn = $this->conn;
+
+        //returns the stmt object
+        $stmt = $this->makeQuery($sql, $conn);
+
+        if (is_object($stmt))
+        {
+            //Save the insertId
+            $this->_insert_id = $stmt->insert_id;
+
+
+            if ($stmt->affected_rows)
+            {
+                $stmt->close();
+
+                //return true if data was inserted
+                return true;
+            } else
+            {
+                //return false if data was not inserted
+                $stmt->close();
+
+                return false;
+            }
+        } else
+        {
+            return false;
+        }
 
     }
 
@@ -125,12 +130,16 @@ class Connection extends Query {
     {
         $conn = $this->conn;
         $sql = $this->_query;// query
-        $results = $this->makeQuery($sql, $conn);
+        //returns a statement object
+        $stmt = $this->makeQuery($sql, $conn);
+
+        $results = $this->bindResults($stmt);
 
         $results = json_encode($results);
 
         var_dump($results);
 
+        return $results;
     } // end of function
 
     /*
@@ -140,9 +149,14 @@ class Connection extends Query {
     {
         $conn = $this->conn;
         $sql = $this->_query;// query
-        $results = $this->makeQuery($sql, $conn);
+        //returns a statement object
+        $stmt = $this->makeQuery($sql, $conn);
+        $results = $this->bindResults($stmt);
 
         var_dump($results);
+
+        //returns results as an array
+        return $results;
 
     } // end of function
 
@@ -153,7 +167,11 @@ class Connection extends Query {
     {
         $conn = $this->conn;
         $sql = $this->_query;// query
-        $results = $this->makeQuery($sql, $conn);
+
+        //returns a statement object
+        $stmt = $this->makeQuery($sql, $conn);
+
+        $results = $this->bindResults($stmt);
 
         //initialize object
         $obj = new \stdClass();
@@ -170,6 +188,52 @@ class Connection extends Query {
 
     } // end of function
 
+    /*
+     * This method binds the results
+     */
+
+    protected function bindResults($stmt)
+    {
+        //store the results
+        $stmt->store_result();
+
+        //store the num_rows in protected variable _num_rows
+        $this->_num_rows = $stmt->num_rows;
+
+
+        //get the meta and the column names from the database
+        $meta = $stmt->result_metadata();
+
+        //loop the fields to get the column names and save the value to the column name as a variable
+        //ex $fields['order'] => [$order];
+        while ($field = $meta->fetch_field())
+        {
+            $var = $field->name; // the field name
+            $$var = null; //create a variable with the same field name
+            $fields[$var] =  &$$var;
+        }
+
+        //bind results
+        call_user_func_array(array($stmt, 'bind_result'), $fields);
+
+        //return the statement as an array
+        $i = 0;
+        while ($stmt->fetch())
+        {
+            $results[$i] = array(); // initialize results array
+            foreach ($fields as $key => $value)
+            {
+                $results[$i][$key] = $value;
+            }
+            $i ++;
+        }
+
+        // close statement
+        $stmt->close();
+
+        return $results;
+
+    }
 
     /*
      * @param1 takes in a valid query created with the query class
@@ -196,45 +260,12 @@ class Connection extends Query {
             //bind Results
             $stmt->execute();
 
-            //store the results
-            $stmt->store_result();
+            //returns the stmt object
+            return $stmt;
+        } else
+        {
 
-            //store the num_rows in protected variable _num_rows
-            $this->_num_rows = $stmt->num_rows;
-
-
-            //get the meta and the column names from the database
-            $meta = $stmt->result_metadata();
-
-            //loop the fields to get the column names and save the value to the column name as a variable
-            //ex $fields['order'] => [$order];
-            while ($field = $meta->fetch_field())
-            {
-                $var = $field->name; // the field name
-                $$var = null; //create a variable with the same field name
-                $fields[$var] =  &$$var;
-            }
-
-            //bind results
-            call_user_func_array(array($stmt, 'bind_result'), $fields);
-
-            //return the statement as an array
-            $i = 0;
-            while ($stmt->fetch())
-            {
-                $results[$i] = array(); // initialize results array
-                foreach ($fields as $key => $value)
-                {
-                    $results[$i][$key] = $value;
-                }
-                $i ++;
-            }
-
-
-            // close statement
-            $stmt->close();
-
-            return $results;
+            return false;
         }
     }
 
@@ -321,6 +352,70 @@ class Connection extends Query {
 
         return $query;
     }
+
+    /*
+     * Gets the number of parameters for the prepared statements
+     *
+     * @return str
+     */
+    public function getParams()
+    {
+        $query = $this->_parameters;
+
+        return $query;
+        // print_r($query);
+    }
+
+    /*
+     * Gets columns for the prepared statements
+     *
+     * @return str
+     */
+    public function getColumns()
+    {
+        $query = $this->_columns;
+
+        // print_r($query);
+        return $query;
+    }
+
+    /*
+     * Returns the last insert id
+     *
+     * @return int
+     */
+    public function getInsertId()
+    {
+        $insert_id = '';
+
+        return $this->_insert_id;
+    }
+
+
+    /*
+     * Gets all the database tables
+     * @param($conn) = mysqli database connection
+     *
+     */
+
+    public function getDatabaseTables()
+    {
+        $conn = $this->conn;
+
+// query to show all the tables
+        $tables = 'SHOW TABLES';
+        $results = $conn->query($tables);
+
+        while ($row = $results->fetch_object())
+        {
+            $dbTables[] = current($row);
+
+        }
+        var_dump($dbTables);
+        return $dbTables;
+
+    }
+
 
 
 } // end of class

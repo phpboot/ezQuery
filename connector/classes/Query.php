@@ -27,6 +27,8 @@ class Query {
     protected $_parameters = array(); //parameters for the bind_parameters() mysqli function
     protected $_num_rows = ''; //number of rows a query retrieved
 
+    protected $_insert_id = ''; // insert id when a row is inserted
+
     public function __construct()
     {
 
@@ -115,16 +117,42 @@ class Query {
 
     public function insert($table, $values = array())
     {
+        //clean up 
+        $this->cleanUp();
+
+        //save the table name
+        $this->_table = $table;
+
+        //Save the column names
         $keys = array_keys($values);
+
         $values = array_values($values);
 
-        $implodedKeys = '`' . implode('`,`', $keys) . '`';
-        $implodedValues = '`' . implode('`,`', $values) . '`';
+        //Save the Column names for the prepared statements
+        $this->_columns = $keys;
 
-        $sql = 'INSERT INTO ' . $table . ' ' . $implodedKeys . ' VALUES ' . $implodedValues;
+        //Save the parameters for the mysqli bind_params()
+        $this->_parameters = $values;
+
+        // make the values into a ? for the prepared statements
+
+        //initialize the variable
+        $preparedStatement = '';
+
+        //loop the column values and foreah value insert into the array a ? for the prepared statement
+        foreach($values as $value){
+            $preparedStatement[] = '?';
+        }
+
+        // implode the array to get this format this format the column names for the insert query
+        $implodedKeys = '`' . implode('`,`', $keys) . '`';
+
+        // implode the array to get this format ?,?,?
+        $implodedValues = implode(' ,', $preparedStatement);
+
+        $sql = 'INSERT INTO ' . $table . ' ( ' . $implodedKeys .' )'. ' VALUES ' .'( ' . $implodedValues . ' )';
 
         $this->_query = $sql;
-        $this->_table = $table;
 
         return $this;
 
