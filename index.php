@@ -6,10 +6,17 @@ $conn = new \connector\classes\Connection();
 
 
 //Get Database Results as object
-$conn->select('orders')
-    ->where('name','=','Orlando')
+$results = $conn
+    ->select('orders')
     ->getObject();
 
 echo $conn->getCount();
+echo $conn->getQuery();
+
+foreach($results as $result){
+    echo $result->id;
+    echo $result->name;
+    echo $result->order;
+}
 
 ?>

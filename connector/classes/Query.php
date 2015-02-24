@@ -11,6 +11,7 @@
  * This class builds a query
  * First - it Builds a query
  * Second - it prepares a statement
+ * Third - returns results however you want them
  */
 
 
@@ -24,6 +25,7 @@ class Query {
     protected $_columns = array(); // columns from a select Query this is used for the prepared statements
 
     protected $_parameters = array(); //parameters for the bind_parameters() mysqli function
+    protected $_num_rows = ''; //number of rows a query retrieved
 
     public function __construct()
     {
@@ -65,7 +67,7 @@ class Query {
 
         $sql = 'SELECT ' . $selectedColumns . ' FROM ' . '`' . $table . '`';
 
-        var_dump($sql);
+       // var_dump($sql);
 
         $this->_query = $sql;
         $this->_table = $table;
@@ -170,15 +172,13 @@ class Query {
         //save the $match as a parameter
         $this->_parameters[] = $match;
 
-        //get the table
-        $table = $this->_table;
         $savedQuery = $this->_query;
-        $sql = ' WHERE ' . $table . '.' . $column . ' ' . $mathSign . ' ?' .'';
+        $sql = ' WHERE ' . $column . ' ' . $mathSign . ' ?' .'';
 
         //save the new query
         $this->_query = $savedQuery . $sql;
 
-        var_dump($this->_query);
+        //var_dump($this->_query);
 
         return $this;
     }
@@ -194,16 +194,15 @@ class Query {
         //save the $match as a parameter
         $this->_parameters[] = $match;
 
-        //get the table
-        $table = $this->_table;
+        //get the query
         $savedQuery = $this->_query;
 
-        $sql = ' AND ' . $table . '.' . $column . ' ' . $mathSign . ' ?' .'';
+        $sql = ' AND ' . $column . ' ' . $mathSign . ' ?' .'';
 
         //save the new query
         $this->_query = $savedQuery . $sql;
 
-        var_dump($this->_query);
+       // var_dump($this->_query);
 
         return $this;
     }
@@ -219,16 +218,14 @@ class Query {
         //save the $match as a parameter
         $this->_parameters[] = $match;
 
-        //get the table
-        $table = $this->_table;
         $savedQuery = $this->_query;
 
-        $sql = ' OR ' . $table . '.' . $column . ' ' . $mathSign . ' ?' .'';
+        $sql = ' OR ' . $column . ' ' . $mathSign . ' ?' .'';
 
         //save the new query
         $this->_query = $savedQuery . $sql;
 
-        var_dump($this->_query);
+      //  var_dump($this->_query);
 
         return $this;
     }
@@ -253,6 +250,27 @@ class Query {
 
         return $this;
     }
+    /*
+     * limits the search results
+     * @param 1 = start number
+     * @param 2 = Amount wanted
+     */
+
+    public function limit($limit = 10, $start = 0)
+    {
+        // get the SQL
+        $savedQuery = $this->_query;
+
+        if(isset($start))
+        {
+            $sql = ' LIMIT ' . $start .' , ' . $limit;
+        }else{
+            $sql = ' LIMIT '. $limit;
+        }
+        //save the new SQL with the new Limit Query
+        $this->_query = $savedQuery . $sql;
+        return $this;
+    }
 
     /*
      * Cleans all the variables so that you can keep querying the database
@@ -260,8 +278,9 @@ class Query {
     protected function cleanUp(){
         $this->_columns = array();
         $this->_parameters = array();
-        $this->table = null;
-        $this->query = null;
+        $this->_table = null;
+        $this->_query = null;
+
     }
 
 }

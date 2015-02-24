@@ -18,7 +18,6 @@ class Connection extends Query {
     protected $conn = ''; // connection object
     protected $tables = ''; //database tables
 
-    protected $_num_rows = ''; //number of rows a query retrieved
 
     /*
      * Constructor connects to the database
@@ -181,7 +180,7 @@ class Connection extends Query {
 
     protected function makeQuery($sql, $conn)
     {
-        $conn = $this->conn;
+        //initiate statement
         $stmt = $conn->stmt_init();
 
         //initialize the arrays
@@ -309,6 +308,18 @@ class Connection extends Query {
         $count = $this->_num_rows;
 
         return $count;
+    }
+
+    /*
+     * Gets the number of rows retrieved from the database
+     *
+     * @return int
+     */
+    public function getQuery()
+    {
+        $query = $this->_query;
+
+        return $query;
     }
 
 
