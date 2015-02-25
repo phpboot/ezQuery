@@ -3,7 +3,20 @@ class for making simple queries from a database
 
 <h2>EZ Query</h2>
 
-The purpouse of this class is to help you query a Mysql database easier by eliminating the repetitive task of connecting to the database preparing statements and executing the results, and parsing the data.
+The purpouse of this class is to help you query a Mysql database easier by eliminating the repetitive task of connecting to the database, preparing statements, and parsing the data.
+
+<h2>configuration</h2>
+
+In order to use the class you need to savethe database information in the config.php file
+
+<pre>
+$connection = array(
+    'username' => 'myUsername',
+    'password' => 'myPassword',
+    'host'     => 'localhost',
+    'database' => 'mydatabase'
+);
+</pre>
 
 <h2>Select</h2>
 
