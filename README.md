@@ -1,9 +1,9 @@
 # ezQuery
 The purpouse of this class is to help you query a Mysql database easier by eliminating the repetitive task of connecting to the database, preparing statements, and parsing the data.
 
-<h2>configuration</h2>
+<h2>Configuration</h2>
 
-In order to use the class you need to savethe database information in the config.php file
+In order to use the class you need to save the database information in the config.php file
 
 <pre>
 $connection = array(
@@ -16,8 +16,13 @@ $connection = array(
 
 <h2>Use</h2>
 How to use the ezQuery
+<ul>
+    <li><a href="#select">Select</a></li>
+    <li></li>
+    <li></li>
+</ul>
 
-<h3>Select</h3>
+<h3 id="select">Select</h3>
 
 To Select information from the database:
 
