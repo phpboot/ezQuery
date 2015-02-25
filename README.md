@@ -26,7 +26,8 @@ How to use the ezQuery
 <h3 id="select">Select</h3>
 
 To Select information from the database:
- You can retrive information as Json ,Array or Object using
+
+<p> You can retrive information as Json ,Array or Object using</p>
  <ul>
     <li>getJson()</li>
     <li>getObject()</li>
