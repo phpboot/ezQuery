@@ -47,7 +47,7 @@ $conn->insert('table',array(
 </pre>
 
 
-<h3 id="delete">>Delete</h3>
+<h3 id="delete">Delete</h3>
 
 To Delete information from the database:
 
