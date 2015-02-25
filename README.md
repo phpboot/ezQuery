@@ -18,8 +18,9 @@ $connection = array(
 How to use the ezQuery
 <ul>
     <li><a href="#select">Select</a></li>
-    <li></li>
-    <li></li>
+    <li><a href="#insert">Insert</a></li>
+    <li><a href="#delete">Delete</a></li>
+    <li><a href="#update">Update</a></li>
 </ul>
 
 <h3 id="select">Select</h3>
@@ -33,7 +34,7 @@ $conn->select('table',array(
       ));
 </pre>
 
-<h3>Insert</h3>
+<h3 id="insert">Insert</h3>
 
 To insert information from the database:
 
@@ -46,7 +47,7 @@ $conn->insert('table',array(
 </pre>
 
 
-<h3>Delete</h3>
+<h3 id="delete">>Delete</h3>
 
 To Delete information from the database:
 
@@ -56,7 +57,7 @@ $conn->delete('table')
       ->destroy();
 </pre>
 
-<h3>Update</h3>
+<h3 id="update">Update</h3>
 
 To Update information from the database:
 
