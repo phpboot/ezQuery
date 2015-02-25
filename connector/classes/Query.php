@@ -23,7 +23,7 @@ class Query {
     protected $_num_rows = ''; //number of rows a query retrieved
 
     protected $_insert_id = ''; // insert id when a row is inserted
-    protected $_errors = array();
+    protected $_errors = array(); // stores errors
 
     public function __construct()
     {
@@ -137,6 +137,7 @@ class Query {
         //Save the column names
         $keys = array_keys($values);
 
+
         $values = array_values($values);
 
         //Save the Column names for the prepared statements
@@ -150,7 +151,7 @@ class Query {
         //initialize the variable
         $preparedStatement = '';
 
-        //loop the column values and foreah value insert into the array a ? for the prepared statement
+        //loop the column values and foreach value insert into the array a ? for the prepared statement
         foreach ($values as $value)
         {
             $preparedStatement[] = '?';
@@ -193,9 +194,44 @@ class Query {
      * @param array $values - values to update
      */
 
-    public function update($table, $values = array())
+    public function update($table, $arrayValues = array())
     {
-        $sql = 'UPDATE ' . $table . 'SET';
+        //clean up
+        $this->cleanUp();
+
+        //save the table name
+        $this->_table = $table;
+
+        //Save the column names
+        $keys = array_keys($arrayValues);
+
+        //save the vaules
+        $values = array_values($arrayValues);
+
+        //Save the Column names for the prepared statements
+        $this->_columns = $keys;
+
+        //Save the parameters for the mysqli bind_params()
+        $this->_parameters = $values;
+
+        //initialize the variable
+        $preparedStatement = '';
+
+        //loop the column values and foreach value insert into the array a ? for the prepared statement
+        foreach ($arrayValues as $key => $value)
+        {
+            $createdStatement[] = '`'.$key . '` '. ' = ' . ' ? ';
+        }
+        $preparedStatement =implode(',',$createdStatement);
+
+
+        $sql = 'UPDATE ' . $table . ' SET ' . $preparedStatement ;
+
+        $this->_query = $sql;
+
+        if(!array($values)){
+            $this->_errors[] = 'update(), 2nd parameter $value must be an array';
+        }
 
         $this->_table = $table;
         $this->_query = $sql;
