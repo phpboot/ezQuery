@@ -16,7 +16,7 @@ require_once('Query.php');
 class Connection extends Query {
 
     protected $conn = ''; // connection object
-    protected $tables = ''; //database tables
+    protected $tables = array(); //database tables
 
 
     /*
@@ -35,25 +35,16 @@ class Connection extends Query {
         //create connection
         $this->conn = $this->dbConnect($connection);
 
-    }
-
-
-    /*
-     * --------------------------------------
-     *
-     * Methods
-     *
-     * ok  -- it works
-     * !ok -- function does not work
-     *
-     * --------------------------------------
-     */
+    } // end of function
 
     /*
      * Connects to the database
      *
-     * ok
+     *  @param array $connection
+     *
+     *  @return void
      */
+
     protected function dbConnect($connection)
     {
         $username = $connection['username'];
@@ -73,22 +64,12 @@ class Connection extends Query {
     } // end of function
 
 
-
-    /* ------------------------------------------
-     *
-     * Getter Methods
-     *
-     * ------------------------------------------
-     */
-    public function getTables()
-    {
-        return $this->tables;
-    }
-
     /*
-     * Save
-     * used for insert it saves a query into the database
+     * Save the insert query into the database
+     *
+     * @return bool
      */
+
     public function save()
     {
         $sql = $this->_query;
@@ -121,11 +102,14 @@ class Connection extends Query {
             return false;
         }
 
-    }
+    } // end of function
 
     /*
      * Makes a query and retrieves information from the database as JSON
+     *
+     * @return string (JSON)
      */
+
     public function getJson()
     {
         $conn = $this->conn;
@@ -144,7 +128,10 @@ class Connection extends Query {
 
     /*
      * Makes a query and retrieves information from the database as an Array
+     *
+     * @return array
      */
+
     public function getArray()
     {
         $conn = $this->conn;
@@ -162,7 +149,10 @@ class Connection extends Query {
 
     /*
      * Makes a query and retrieves information from the database as Object
+     *
+     * @return object
      */
+
     public function getObject()
     {
         $conn = $this->conn;
@@ -190,10 +180,18 @@ class Connection extends Query {
 
     /*
      * This method binds the results
+     *
+     * @param object $stmt -  mysqli_stmt object
+     *
+     * @return array
      */
 
     protected function bindResults($stmt)
     {
+        //initialize arrays
+        $fields = array();
+        $results = array();
+
         //store the results
         $stmt->store_result();
 
@@ -214,7 +212,10 @@ class Connection extends Query {
         }
 
         //bind results
-        call_user_func_array(array($stmt, 'bind_result'), $fields);
+        if (!call_user_func_array(array($stmt, 'bind_result'), $fields))
+        {
+            $this->_errors[] = 'bindResults() , Error binding results';
+        }
 
         //return the statement as an array
         $i = 0;
@@ -233,13 +234,13 @@ class Connection extends Query {
 
         return $results;
 
-    }
+    } // end of function
 
     /*
-     * @param1 takes in a valid query created with the query class
-     * @param2 obj takes a mysqli connection object
+     * @param string $sql  = takes in a valid query created with the query class
+     * @param object $conn = obj takes a mysqli_connect object
      *
-     * @return array returns an array with the results from the database
+     * @return array = returns an array with the results from the database
      */
 
     protected function makeQuery($sql, $conn)
@@ -247,9 +248,6 @@ class Connection extends Query {
         //initiate statement
         $stmt = $conn->stmt_init();
 
-        //initialize the arrays
-        $fields = array();
-        $results = array();
 
         //Prepare the query
         if ($stmt->prepare($sql))
@@ -258,22 +256,30 @@ class Connection extends Query {
             $this->bindParameters($stmt);
 
             //bind Results
-            $stmt->execute();
+            if (!$stmt->execute())
+            {
+                $this->_errors[] = 'makeQuery() , execute failed to query database';
+            }
 
             //returns the stmt object
             return $stmt;
         } else
         {
-
             return false;
         }
-    }
+    } // end of function
 
     /*
      * Determines if it needs to bind the parameters or not
+     *
+     * @param $object $stmt - mysqli_stmt object
+     *
+     * @return bool
      */
+
     protected function bindParameters($stmt)
     {
+
 
         //get the parameters from the database
         $params = $this->_parameters;
@@ -317,9 +323,17 @@ class Connection extends Query {
                 }
 
                 //bind the parameters
-                call_user_func_array(array($stmt, 'bind_param'), $bind_names);
+                if (!call_user_func_array(array($stmt, 'bind_param'), $bind_names))
+                {
+                    echo $this->_errors[] = 'Error binding parameters';
 
-                // var_dump($bind_names);
+                    return false;
+                } else
+                {
+                    // var_dump($bind_names);
+                    return true;
+                }
+
             }
         } else
         {
@@ -328,81 +342,125 @@ class Connection extends Query {
 
     }// end of function
 
+    /*
+     * Function destroys rows from the database
+     *
+     * @return bool
+     */
+
+    public function destroy()
+    {
+
+        //Connection
+        $conn = $this->conn;
+
+        //get the query
+        $sql = $this->_query;
+
+        $stmt = $this->makeQuery($sql, $conn);
+
+        if (is_object($stmt))
+        {
+
+            if ($stmt->affected_rows)
+            {
+                echo 'deleted';
+
+                return true;
+            }
+        } else
+        {
+            echo 'not deleted';
+
+            return false;
+        }
+    } // end of function
+
 
     /*
      * Gets the number of rows retrieved from the database
      *
      * @return int
      */
+
     public function getCount()
     {
         $count = $this->_num_rows;
 
         return $count;
-    }
+    } // end of function
 
     /*
      * Gets the number of rows retrieved from the database
      *
      * @return int
      */
+
     public function getQuery()
     {
         $query = $this->_query;
 
         return $query;
-    }
+    } // end of function
 
     /*
      * Gets the number of parameters for the prepared statements
      *
      * @return str
      */
+
     public function getParams()
     {
         $query = $this->_parameters;
 
         return $query;
         // print_r($query);
-    }
+    } // end of function
 
     /*
      * Gets columns for the prepared statements
      *
      * @return str
      */
+
     public function getColumns()
     {
         $query = $this->_columns;
 
         // print_r($query);
         return $query;
-    }
+    } // end of function
 
     /*
      * Returns the last insert id
      *
      * @return int
      */
+
     public function getInsertId()
     {
-        $insert_id = '';
-
         return $this->_insert_id;
     }
 
+    /*
+     *
+     */
+    public function getTables()
+    {
+        return $this->tables;
+    } // end of function
 
     /*
      * Gets all the database tables
-     * @param($conn) = mysqli database connection
      *
+     * @return array
      */
 
-    public function getDatabaseTables()
+    protected function getDatabaseTables()
     {
         $conn = $this->conn;
 
-// query to show all the tables
+        // query to show all the tables
         $tables = 'SHOW TABLES';
         $results = $conn->query($tables);
 
@@ -412,11 +470,28 @@ class Connection extends Query {
 
         }
         var_dump($dbTables);
+
         return $dbTables;
 
-    }
+    } // end of function
 
+    /*
+     * returns errors in an array form
+     *
+     * @return array
+     */
 
+    public function getErrors()
+    {
+        $errors = $this->_errors;
+
+        if (!empty($errors))
+        {
+            var_dump($errors);
+        }
+
+        return $errors;
+    } // end of function
 
 } // end of class
 ?>

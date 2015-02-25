@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="962ef3cb-47f2-41f2-bef8-02ef79ad2877" name="Default" comment="">
+    <list default="true" id="962ef3cb-47f2-41f2-bef8-02ef79ad2877" name="Default" comment="Added a new delete functionality">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/connector/classes/Connection.php" afterPath="$PROJECT_DIR$/connector/classes/Connection.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/connector/classes/Query.php" afterPath="$PROJECT_DIR$/connector/classes/Query.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
@@ -25,15 +25,15 @@
     <disable_hints />
   </component>
   <component name="DockManager">
-    <window id="1">
+    <window id="3">
       <content type="file-editors">
         <state>
           <leaf>
             <file leaf-file-name="index.php" pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/index.php">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state vertical-scroll-proportion="0.18529412" vertical-offset="0" max-vertical-offset="680">
-                    <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+                  <state vertical-scroll-proportion="0.4764706" vertical-offset="0" max-vertical-offset="680">
+                    <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
                     <folding />
                   </state>
                 </provider>
@@ -49,24 +49,15 @@
     <favorites_list name="ezQuery" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.48040754">
+    <splitter split-orientation="horizontal" split-proportion="0.4106583">
       <split-first>
         <leaf>
-          <file leaf-file-name="Query.php" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/connector/classes/Query.php">
+          <file leaf-file-name="Connection.php" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/connector/classes/Connection.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.05377907" vertical-offset="791" max-vertical-offset="5634">
-                  <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
-                  <folding>
-                    <marker date="1424811503000" expanded="true" signature="964:978" placeholder="SELECT * FRO..." />
-                    <marker date="1424811503000" expanded="true" signature="3946:3974" placeholder="INSERT INTO ..." />
-                    <marker date="1424811503000" expanded="true" signature="3946:4009" placeholder="INSERT INTO ..." />
-                    <marker date="1424811503000" expanded="true" signature="3946:4014" placeholder="INSERT INTO ..." />
-                    <marker date="1424811503000" expanded="true" signature="3946:4014" placeholder="INSERT INTO ..." />
-                    <marker date="1424811503000" expanded="true" signature="3946:4040" placeholder="INSERT INTO ..." />
-                    <marker date="1424811503000" expanded="true" signature="3946:4041" placeholder="INSERT INTO ..." />
-                    <marker date="1424811503000" expanded="true" signature="4238:4271" placeholder="DELETE FROM ..." />
-                  </folding>
+                <state vertical-scroll-proportion="-11.741279" vertical-offset="8330" max-vertical-offset="9018">
+                  <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -75,12 +66,20 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="Connection.php" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/connector/classes/Connection.php">
+          <file leaf-file-name="Query.php" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/connector/classes/Query.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="3.6959152" vertical-offset="1571" max-vertical-offset="7668">
-                  <caret line="229" column="0" selection-start-line="229" selection-start-column="0" selection-end-line="229" selection-end-column="0" />
-                  <folding />
+                <state vertical-scroll-proportion="8.81686" vertical-offset="0" max-vertical-offset="6516">
+                  <caret line="343" column="21" selection-start-line="343" selection-start-column="21" selection-end-line="343" selection-end-column="21" />
+                  <folding>
+                    <marker date="1424824161000" expanded="true" signature="915:929" placeholder="SELECT * FRO..." />
+                    <marker date="1424824161000" expanded="true" signature="4246:4274" placeholder="INSERT INTO ..." />
+                    <marker date="1424824161000" expanded="true" signature="4246:4311" placeholder="INSERT INTO ..." />
+                    <marker date="1424824161000" expanded="true" signature="4246:4317" placeholder="INSERT INTO ..." />
+                    <marker date="1424824161000" expanded="true" signature="4246:4343" placeholder="INSERT INTO ..." />
+                    <marker date="1424824161000" expanded="true" signature="4246:4344" placeholder="INSERT INTO ..." />
+                    <marker date="1424824161000" expanded="true" signature="4602:4635" placeholder="DELETE FROM ..." />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -95,8 +94,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/connector/classes/Query.php" />
         <option value="$PROJECT_DIR$/connector/classes/Connection.php" />
+        <option value="$PROJECT_DIR$/connector/classes/Query.php" />
         <option value="$PROJECT_DIR$/index.php" />
       </list>
     </option>
@@ -106,7 +105,6 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" interpreter_name="Local PHP5.6.1" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="4" />
     <option name="y" value="23" />
     <option name="width" value="1276" />
     <option name="height" value="777" />
@@ -122,7 +120,7 @@
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
+    <navigator proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -133,79 +131,7 @@
       <autoscrollFromSource />
       <sortByType />
     </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ezQuery" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ezQuery" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ezQuery" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ezQuery" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ezQuery" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tests" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ezQuery" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ezQuery" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="connector" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ezQuery" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ezQuery" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="connector" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="classes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
     <property name="options.lastSelected" value="configurable.group.appearance" />
@@ -217,6 +143,26 @@
     <property name="ignore_missing_gitignore" value="true" />
   </component>
   <component name="RunManager">
+    <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpBehatConfigurationType" factoryName="Behat">
+      <BehatRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <method />
+    </configuration>
     <list size="0" />
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
@@ -236,13 +182,20 @@
       <option name="project" value="LOCAL" />
       <updated>1424742178052</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Added new insert functionality&#10;&#10;now you can insert items like this&#10;&#10;$conn-&gt;insert('table',array(&#10;'column1' =&gt;'value 1',&#10;'column 2' =&gt;'value 2'))&#10;-&gt;save();">
+      <created>1424814245532</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1424814245532</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="4" y="23" width="1276" height="777" extended-state="6" />
+    <frame x="0" y="23" width="1276" height="777" extended-state="6" />
     <editor active="true" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980132" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980132" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -259,7 +212,6 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980132" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -282,10 +234,13 @@
       <TodoPanelSettings />
     </option>
     <MESSAGE value="Created a Limit method" />
-    <option name="LAST_COMMIT_MESSAGE" value="Created a Limit method" />
+    <MESSAGE value="Added new insert functionality&#10;&#10;now you can insert items like this&#10;&#10;$conn-&gt;insert('table',array(&#10;'column1' =&gt;'value 1',&#10;'column 2' =&gt;'value 2'))&#10;-&gt;save();" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added new insert functionality&#10;&#10;now you can insert items like this&#10;&#10;$conn-&gt;insert('table',array(&#10;'column1' =&gt;'value 1',&#10;'column 2' =&gt;'value 2'))&#10;-&gt;save();" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
@@ -294,14 +249,13 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="1998" max-vertical-offset="5166">
           <caret line="117" column="19" selection-start-line="117" selection-start-column="19" selection-end-line="117" selection-end-column="19" />
           <folding>
-            <marker date="1424811503000" expanded="true" signature="964:978" placeholder="SELECT * FRO..." />
-            <marker date="1424811503000" expanded="true" signature="3946:3974" placeholder="INSERT INTO ..." />
-            <marker date="1424811503000" expanded="true" signature="3946:4009" placeholder="INSERT INTO ..." />
-            <marker date="1424811503000" expanded="true" signature="3946:4014" placeholder="INSERT INTO ..." />
-            <marker date="1424811503000" expanded="true" signature="3946:4014" placeholder="INSERT INTO ..." />
-            <marker date="1424811503000" expanded="true" signature="3946:4040" placeholder="INSERT INTO ..." />
-            <marker date="1424811503000" expanded="true" signature="3946:4041" placeholder="INSERT INTO ..." />
-            <marker date="1424811503000" expanded="true" signature="4238:4271" placeholder="DELETE FROM ..." />
+            <marker date="1424824161000" expanded="true" signature="915:929" placeholder="SELECT * FRO..." />
+            <marker date="1424824161000" expanded="true" signature="4246:4274" placeholder="INSERT INTO ..." />
+            <marker date="1424824161000" expanded="true" signature="4246:4311" placeholder="INSERT INTO ..." />
+            <marker date="1424824161000" expanded="true" signature="4246:4317" placeholder="INSERT INTO ..." />
+            <marker date="1424824161000" expanded="true" signature="4246:4343" placeholder="INSERT INTO ..." />
+            <marker date="1424824161000" expanded="true" signature="4246:4344" placeholder="INSERT INTO ..." />
+            <marker date="1424824161000" expanded="true" signature="4602:4635" placeholder="DELETE FROM ..." />
           </folding>
         </state>
       </provider>
@@ -327,14 +281,13 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="3096" max-vertical-offset="5130">
           <caret line="178" column="43" selection-start-line="178" selection-start-column="43" selection-end-line="178" selection-end-column="43" />
           <folding>
-            <marker date="1424811503000" expanded="true" signature="964:978" placeholder="SELECT * FRO..." />
-            <marker date="1424811503000" expanded="true" signature="3946:3974" placeholder="INSERT INTO ..." />
-            <marker date="1424811503000" expanded="true" signature="3946:4009" placeholder="INSERT INTO ..." />
-            <marker date="1424811503000" expanded="true" signature="3946:4014" placeholder="INSERT INTO ..." />
-            <marker date="1424811503000" expanded="true" signature="3946:4014" placeholder="INSERT INTO ..." />
-            <marker date="1424811503000" expanded="true" signature="3946:4040" placeholder="INSERT INTO ..." />
-            <marker date="1424811503000" expanded="true" signature="3946:4041" placeholder="INSERT INTO ..." />
-            <marker date="1424811503000" expanded="true" signature="4238:4271" placeholder="DELETE FROM ..." />
+            <marker date="1424824161000" expanded="true" signature="915:929" placeholder="SELECT * FRO..." />
+            <marker date="1424824161000" expanded="true" signature="4246:4274" placeholder="INSERT INTO ..." />
+            <marker date="1424824161000" expanded="true" signature="4246:4311" placeholder="INSERT INTO ..." />
+            <marker date="1424824161000" expanded="true" signature="4246:4317" placeholder="INSERT INTO ..." />
+            <marker date="1424824161000" expanded="true" signature="4246:4343" placeholder="INSERT INTO ..." />
+            <marker date="1424824161000" expanded="true" signature="4246:4344" placeholder="INSERT INTO ..." />
+            <marker date="1424824161000" expanded="true" signature="4602:4635" placeholder="DELETE FROM ..." />
           </folding>
         </state>
       </provider>
@@ -360,14 +313,13 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="3096" max-vertical-offset="5130">
           <caret line="178" column="43" selection-start-line="178" selection-start-column="43" selection-end-line="178" selection-end-column="43" />
           <folding>
-            <marker date="1424811503000" expanded="true" signature="964:978" placeholder="SELECT * FRO..." />
-            <marker date="1424811503000" expanded="true" signature="3946:3974" placeholder="INSERT INTO ..." />
-            <marker date="1424811503000" expanded="true" signature="3946:4009" placeholder="INSERT INTO ..." />
-            <marker date="1424811503000" expanded="true" signature="3946:4014" placeholder="INSERT INTO ..." />
-            <marker date="1424811503000" expanded="true" signature="3946:4014" placeholder="INSERT INTO ..." />
-            <marker date="1424811503000" expanded="true" signature="3946:4040" placeholder="INSERT INTO ..." />
-            <marker date="1424811503000" expanded="true" signature="3946:4041" placeholder="INSERT INTO ..." />
-            <marker date="1424811503000" expanded="true" signature="4238:4271" placeholder="DELETE FROM ..." />
+            <marker date="1424824161000" expanded="true" signature="915:929" placeholder="SELECT * FRO..." />
+            <marker date="1424824161000" expanded="true" signature="4246:4274" placeholder="INSERT INTO ..." />
+            <marker date="1424824161000" expanded="true" signature="4246:4311" placeholder="INSERT INTO ..." />
+            <marker date="1424824161000" expanded="true" signature="4246:4317" placeholder="INSERT INTO ..." />
+            <marker date="1424824161000" expanded="true" signature="4246:4343" placeholder="INSERT INTO ..." />
+            <marker date="1424824161000" expanded="true" signature="4246:4344" placeholder="INSERT INTO ..." />
+            <marker date="1424824161000" expanded="true" signature="4602:4635" placeholder="DELETE FROM ..." />
           </folding>
         </state>
       </provider>
@@ -393,14 +345,13 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="3096" max-vertical-offset="5130">
           <caret line="178" column="43" selection-start-line="178" selection-start-column="43" selection-end-line="178" selection-end-column="43" />
           <folding>
-            <marker date="1424811503000" expanded="true" signature="964:978" placeholder="SELECT * FRO..." />
-            <marker date="1424811503000" expanded="true" signature="3946:3974" placeholder="INSERT INTO ..." />
-            <marker date="1424811503000" expanded="true" signature="3946:4009" placeholder="INSERT INTO ..." />
-            <marker date="1424811503000" expanded="true" signature="3946:4014" placeholder="INSERT INTO ..." />
-            <marker date="1424811503000" expanded="true" signature="3946:4014" placeholder="INSERT INTO ..." />
-            <marker date="1424811503000" expanded="true" signature="3946:4040" placeholder="INSERT INTO ..." />
-            <marker date="1424811503000" expanded="true" signature="3946:4041" placeholder="INSERT INTO ..." />
-            <marker date="1424811503000" expanded="true" signature="4238:4271" placeholder="DELETE FROM ..." />
+            <marker date="1424824161000" expanded="true" signature="915:929" placeholder="SELECT * FRO..." />
+            <marker date="1424824161000" expanded="true" signature="4246:4274" placeholder="INSERT INTO ..." />
+            <marker date="1424824161000" expanded="true" signature="4246:4311" placeholder="INSERT INTO ..." />
+            <marker date="1424824161000" expanded="true" signature="4246:4317" placeholder="INSERT INTO ..." />
+            <marker date="1424824161000" expanded="true" signature="4246:4343" placeholder="INSERT INTO ..." />
+            <marker date="1424824161000" expanded="true" signature="4246:4344" placeholder="INSERT INTO ..." />
+            <marker date="1424824161000" expanded="true" signature="4602:4635" placeholder="DELETE FROM ..." />
           </folding>
         </state>
       </provider>
@@ -413,35 +364,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.php">
+    <entry file="file://$PROJECT_DIR$/connector/classes/Connection.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.18529412" vertical-offset="0" max-vertical-offset="680">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+        <state vertical-scroll-proportion="-11.741279" vertical-offset="8330" max-vertical-offset="9018">
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/connector/classes/Connection.php">
+    <entry file="file://$PROJECT_DIR$/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.6959152" vertical-offset="1571" max-vertical-offset="7668">
-          <caret line="229" column="0" selection-start-line="229" selection-start-column="0" selection-end-line="229" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.4764706" vertical-offset="0" max-vertical-offset="680">
+          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/connector/classes/Query.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.05377907" vertical-offset="791" max-vertical-offset="5634">
-          <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+        <state vertical-scroll-proportion="8.81686" vertical-offset="0" max-vertical-offset="6516">
+          <caret line="343" column="21" selection-start-line="343" selection-start-column="21" selection-end-line="343" selection-end-column="21" />
           <folding>
-            <marker date="1424811503000" expanded="true" signature="964:978" placeholder="SELECT * FRO..." />
-            <marker date="1424811503000" expanded="true" signature="3946:3974" placeholder="INSERT INTO ..." />
-            <marker date="1424811503000" expanded="true" signature="3946:4009" placeholder="INSERT INTO ..." />
-            <marker date="1424811503000" expanded="true" signature="3946:4014" placeholder="INSERT INTO ..." />
-            <marker date="1424811503000" expanded="true" signature="3946:4014" placeholder="INSERT INTO ..." />
-            <marker date="1424811503000" expanded="true" signature="3946:4040" placeholder="INSERT INTO ..." />
-            <marker date="1424811503000" expanded="true" signature="3946:4041" placeholder="INSERT INTO ..." />
-            <marker date="1424811503000" expanded="true" signature="4238:4271" placeholder="DELETE FROM ..." />
+            <marker date="1424824161000" expanded="true" signature="915:929" placeholder="SELECT * FRO..." />
+            <marker date="1424824161000" expanded="true" signature="4246:4274" placeholder="INSERT INTO ..." />
+            <marker date="1424824161000" expanded="true" signature="4246:4311" placeholder="INSERT INTO ..." />
+            <marker date="1424824161000" expanded="true" signature="4246:4317" placeholder="INSERT INTO ..." />
+            <marker date="1424824161000" expanded="true" signature="4246:4343" placeholder="INSERT INTO ..." />
+            <marker date="1424824161000" expanded="true" signature="4246:4344" placeholder="INSERT INTO ..." />
+            <marker date="1424824161000" expanded="true" signature="4602:4635" placeholder="DELETE FROM ..." />
           </folding>
         </state>
       </provider>

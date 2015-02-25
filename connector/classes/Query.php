@@ -9,14 +9,9 @@
 
 /*
  * This class builds a query
- * First - it Builds a query
- * Second - it prepares a statement
- * Third - returns results however you want them
  */
 
-
 namespace connector\classes;
-
 
 class Query {
 
@@ -28,39 +23,50 @@ class Query {
     protected $_num_rows = ''; //number of rows a query retrieved
 
     protected $_insert_id = ''; // insert id when a row is inserted
+    protected $_errors = array();
 
     public function __construct()
     {
 
-    }
+    } // end of function
 
     /*
      * Selects all rows from a table
-     * @ void
+     *
+     * @return void
      */
+
     protected function all($table)
     {
         $sql = 'SELECT * FROM ' . $table;
         $this->_query = $sql;
         $this->_table = $table;
 
-    }
+    } // end of function
 
     /*
-    * Build the Select Query and returns it
-    */
+     * Build the Select Query and returns it
+     *
+     * @param array $columns - columns that you want to select from the database
+     *
+     * @return string
+     */
+
     protected function buildSelectQuery($columns)
     {
         return $selectedColumns = '`' . implode('` , `', $columns) . '`';
-    }
+    } // end of function
 
 
     /*
      * The amount of columns for the Query is not known so call_user_func_array is used
      * to make the select method more flexible when querying the database.
      *
-     * @ void
+     * @param string $table
+     *
+     * @return void
      */
+
     protected function selectColumns($table, $columns)
     {
 
@@ -69,18 +75,21 @@ class Query {
 
         $sql = 'SELECT ' . $selectedColumns . ' FROM ' . '`' . $table . '`';
 
-       // var_dump($sql);
+        // var_dump($sql);
 
         $this->_query = $sql;
         $this->_table = $table;
 
-    }
+    } // end of function
 
     /*
-     * Selects a table from a database if the column array is not defined then
+     * Selects a table from a database if the $column array is not defined then
      * all the results from the table will be returned
-     * Param1 = table name
-     * Param 2 = columns (optional)
+     *
+     * @param string $table  - table name
+     * @param array  $columns -(optional)
+     *
+     * @return object
      */
 
     public function select($table, $columns = array())
@@ -106,13 +115,15 @@ class Query {
         }
 
         return $this;
-    }
+    } // end of function
 
 
     /*
      *  Inserts in the database
-     * @param 1 = table name
-     * @param 2 = array of values where key is the tale name and value is the the value to add
+     * @param string $table - table name
+     * @param array $values - associative array where key => value is $column => 'insert value'
+     *
+     * @return object
      */
 
     public function insert($table, $values = array())
@@ -140,7 +151,8 @@ class Query {
         $preparedStatement = '';
 
         //loop the column values and foreah value insert into the array a ? for the prepared statement
-        foreach($values as $value){
+        foreach ($values as $value)
+        {
             $preparedStatement[] = '?';
         }
 
@@ -150,32 +162,35 @@ class Query {
         // implode the array to get this format ?,?,?
         $implodedValues = implode(' ,', $preparedStatement);
 
-        $sql = 'INSERT INTO ' . $table . ' ( ' . $implodedKeys .' )'. ' VALUES ' .'( ' . $implodedValues . ' )';
+        $sql = 'INSERT INTO ' . $table . ' ( ' . $implodedKeys . ' )' . ' VALUES ' . '( ' . $implodedValues . ' )';
 
         $this->_query = $sql;
 
         return $this;
 
-    }
+    } // end of function
 
     /*
      * Deletes from a database
-     * @param 1 - table name
+     * @param string $table - table name
+     *
+     * @return object
      */
 
     public function delete($table)
     {
+
         $sql = 'DELETE FROM ' . '`' . $table . '`';
         $this->_query = $sql;
         $this->_table = $table;
 
         return $this;
-    }
+    } // end of function
 
     /*
      * Updates a table in the database
-     * @param 1 = table name
-     * @param 2 = column values in an array where 'column name' =>'columns value'
+     * @param string $table - table name
+     * @param array $values - values to update
      */
 
     public function update($table, $values = array())
@@ -186,14 +201,18 @@ class Query {
         $this->_query = $sql;
 
         return $this;
-    }
+    } // end of function
 
     /*
-     * selects where to using table name and a
-     * @param 1 = table name
-     * @param 2 = arithmetic sign (+,-,<=,>=,!=)
-     * @param 3 = what to look for in the table
+     * Selects where to using table name and a
+     *
+     * @param string $column   - table name
+     * @param string $mathSign - arithmetic sign (+,-,<=,>=,!=)
+     * @param string $match    - what to look for in the table
+     *
+     * @return object
      */
+
     public function where($column, $mathSign, $match)
     {
 
@@ -201,7 +220,7 @@ class Query {
         $this->_parameters[] = $match;
 
         $savedQuery = $this->_query;
-        $sql = ' WHERE ' . $column . ' ' . $mathSign . ' ?' .'';
+        $sql = ' WHERE ' . $column . ' ' . $mathSign . ' ?' . '';
 
         //save the new query
         $this->_query = $savedQuery . $sql;
@@ -209,13 +228,18 @@ class Query {
         //var_dump($this->_query);
 
         return $this;
-    }
+    } // end of function
+
     /*
-     * selects where to using table name and a
-     * @param 1 = table name
-     * @param 2 = arithmetic sign (+,-,<=,>=,!=)
-     * @param 3 = what to look for in the table
+     * Selects where to using table name and a
+     *
+     * @param string $column   - table name
+     * @param string $mathSign - arithmetic sign (+,-,<=,>=,!=)
+     * @param string $match    - what to look for in the table
+     *
+     * @return object
      */
+
     public function andWhere($column, $mathSign, $match)
     {
 
@@ -225,21 +249,26 @@ class Query {
         //get the query
         $savedQuery = $this->_query;
 
-        $sql = ' AND ' . $column . ' ' . $mathSign . ' ?' .'';
+        $sql = ' AND ' . $column . ' ' . $mathSign . ' ?' . '';
 
         //save the new query
         $this->_query = $savedQuery . $sql;
 
-       // var_dump($this->_query);
+        // var_dump($this->_query);
 
         return $this;
-    }
+    } // end of function
+
     /*
-     * selects where to using table name and a
-     * @param 1 = table name
-     * @param 2 = arithmetic sign (+,-,<=,>=,!=)
-     * @param 3 = what to look for in the table
+     * Selects where to using table name and a
+     *
+     * @param string $column   - table name
+     * @param string $mathSign - arithmetic sign (+,-,<=,>=,!=)
+     * @param string $match    - what to look for in the table
+     *
+     * @return object
      */
+
     public function orWhere($column, $mathSign, $match)
     {
 
@@ -248,24 +277,34 @@ class Query {
 
         $savedQuery = $this->_query;
 
-        $sql = ' OR ' . $column . ' ' . $mathSign . ' ?' .'';
+        $sql = ' OR ' . $column . ' ' . $mathSign . ' ?' . '';
 
         //save the new query
         $this->_query = $savedQuery . $sql;
 
-      //  var_dump($this->_query);
+        //  var_dump($this->_query);
 
         return $this;
-    }
+    } // end of function
 
     /*
-     * selects where to using table name and a
-     * @param 1 = table name
-     * @param 2 = arithmetic sign (+,-,<=,>=,!=)
-     * @param 3 = what to look for in the table
+     * Orders a database result
+     * @param  str $column  - table name
+     * @param  str $order   - orders results as descending or ascending
+     *
+     * @return object
      */
+
     public function orderBy($column, $order = 'DESC')
     {
+        //check that only ASC or DESC values are inputted
+        $orderValues = array('DESC', 'ASC');
+
+        if (!in_array($orderValues, $order))
+        {
+            $order = 'DESC';
+        }
+
         // get the Generated Query
         $savedQuery = $this->_query;
 
@@ -277,11 +316,14 @@ class Query {
         var_dump($this->_query);
 
         return $this;
-    }
+    } // end of function
+
     /*
      * limits the search results
-     * @param 1 = start number
-     * @param 2 = Amount wanted
+     * @param int $limit - Number to start fetching records
+     * @param int $start - Amount or records wanted
+     *
+     * @return object
      */
 
     public function limit($limit = 10, $start = 0)
@@ -289,26 +331,32 @@ class Query {
         // get the SQL
         $savedQuery = $this->_query;
 
-        if(isset($start))
+        if (isset($start))
         {
-            $sql = ' LIMIT ' . $start .' , ' . $limit;
-        }else{
-            $sql = ' LIMIT '. $limit;
+            $sql = ' LIMIT ' . $start . ' , ' . $limit;
+        } else
+        {
+            $sql = ' LIMIT ' . $limit;
         }
         //save the new SQL with the new Limit Query
         $this->_query = $savedQuery . $sql;
+
         return $this;
-    }
+    } // end of function
 
     /*
      * Cleans all the variables so that you can keep querying the database
+     *
+     * @return void
      */
-    protected function cleanUp(){
+
+    protected function cleanUp()
+    {
         $this->_columns = array();
         $this->_parameters = array();
         $this->_table = null;
         $this->_query = null;
 
-    }
+    } // end of function
 
-}
+} // end of class
