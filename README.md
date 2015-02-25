@@ -15,3 +15,39 @@ $conn->select('table',array(
       'column2' => 'value 2'
       ));
 </pre>
+
+<h2>Insert</h2>
+
+To insert information from the database:
+
+<pre>
+$conn->insert('table',array(
+      'column1' => 'value1',
+      'column2' => 'value 2'
+      ))
+      ->save();
+</pre>
+
+
+<h2>Delete</h2>
+
+To Delete information from the database:
+
+<pre>
+$conn->delete('table')
+      ->where('id','=', 1)
+      ->destroy();
+</pre>
+
+<h2>Select</h2>
+
+To Update information from the database:
+
+<pre>
+$conn->update('table', array(
+    'column1' => 'value1',
+    'column2'  => 'value2'
+))->where('id', '=', '1')
+  ->save();
+</pre>
+
