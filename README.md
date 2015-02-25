@@ -34,6 +34,7 @@ To Select information from the database:
     <li>getArray()</li>
  </ul>
 
+<h4>Example</h4>
 <pre>
 $conn->select('table',array(
       'column1' => 'value1',
@@ -46,6 +47,7 @@ $conn->select('table',array(
 
 To insert information from the database:
 
+<h4>Example</h4>
 <pre>
 $conn->insert('table',array(
       'column1' => 'value1',
@@ -58,6 +60,7 @@ $conn->insert('table',array(
 <h3 id="delete">Delete</h3>
 
 To Delete information from the database:
+<h4>Example</h4>
 
 <pre>
 $conn->delete('table')
@@ -68,6 +71,7 @@ $conn->delete('table')
 <h3 id="update">Update</h3>
 
 To Update information from the database:
+<h4>Example</h4>
 
 <pre>
 $conn->update('table', array(
