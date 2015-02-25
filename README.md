@@ -26,12 +26,19 @@ How to use the ezQuery
 <h3 id="select">Select</h3>
 
 To Select information from the database:
+ You can retrive information as Json ,Array or Object using
+ <ul>
+    <li>getJson()</li>
+    <li>getObject()</li>
+    <li>getArray()</li>
+ </ul>
 
 <pre>
 $conn->select('table',array(
       'column1' => 'value1',
       'column2' => 'value 2'
-      ));
+      ))
+      ->getObject();
 </pre>
 
 <h3 id="insert">Insert</h3>
