@@ -39,7 +39,7 @@ $conn->delete('table')
       ->destroy();
 </pre>
 
-<h2>Select</h2>
+<h2>Update</h2>
 
 To Update information from the database:
 
